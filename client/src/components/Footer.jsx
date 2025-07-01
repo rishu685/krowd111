@@ -3,26 +3,26 @@ import React from 'react'
 const Footer = () => {
   return (
     <div>
-        <footer className="mt-[2rem] mobile:py-2 px-3 py-8 text-gray-500 transition-colors duration-200 bg-white dark:bg-[#1c1c24] rounded-xl text-2 dark:text-[#808191]">
+        <footer className="mt-[2rem] mobile:py-2 px-3 py-8 text-gray-500 transition-colors duration-200 bg-white dark:bg-[#0f0f14] rounded-xl text-2 dark:text-[#606070]">
             <div className="flex flex-col">
                 <div className="h-px mx-auto rounded-full md:hidden mt-7 w-11">
                 </div>
                 <div className="flex flex-col mt-4 md:mt-0 md:flex-row">
-                    <nav className="flex flex-col items-center justify-center flex-1 border-[#2e2e38] md:items-end md:border-r md:pr-5">
-                        <a aria-current="page" href="#" className="hover:text-gray-700 dark:hover:text-white">
+                    <nav className="flex flex-col items-center justify-center flex-1 border-[#1e1e28] md:items-end md:border-r md:pr-5">
+                        <a aria-current="page" href="/" className="hover:text-gray-700 dark:hover:text-white">
                             Home Page
                         </a>
-                        <a aria-current="page" href="#" className="hover:text-gray-700 dark:hover:text-white">
-                            Signup / Login
+                        <a aria-current="page" href="/create-campaign" className="hover:text-gray-700 dark:hover:text-white">
+                            Create Campaign
                         </a>
-                        <a aria-current="page" href="#" className="hover:text-gray-700 dark:hover:text-white">
-                            Contact Us
+                        <a aria-current="page" href="/all-campaigns" className="hover:text-gray-700 dark:hover:text-white">
+                            All Campaigns
                         </a>
                     </nav>
                     <div className="h-px mx-auto mt-4 rounded-full mobile:hidden md:hidden w-11">
                     </div>
-                    <div className="flex items-center justify-center flex-1 mt-4 border-[#2e2e38] md:mt-0 md:border-r">
-                        <a className="hover:text-primary-gray-20" href="https://github.com/charlesknapp/crowdfunding-platformt">
+                    <div className="flex items-center justify-center flex-1 mt-4 border-[#1e1e28] md:mt-0 md:border-r">
+                        <a className="hover:text-primary-gray-20" href="https://github.com/yourusername/your-repo-name">
                             <span className="sr-only">
                                 View on GitHub
                             </span>

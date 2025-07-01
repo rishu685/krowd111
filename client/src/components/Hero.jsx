@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <div className="rounded-xl dark:bg-[#1c1c24]">
+    <div className="rounded-xl dark:bg-[#0f0f14]">
         { /* ============================ HERO ELEMENT ============================ */ }
-        <div className="bg-white dark:bg-[#1c1c24] rounded-t-xl overflow-hidden relative lg:flex lg:items-center">
+        <div className="bg-white dark:bg-[#0f0f14] rounded-t-xl overflow-hidden relative lg:flex lg:items-center">
             <div className="w-full py-12 px-4 sm:px-6 xl:py-16 xl:px-12 self-start z-20">
                 <h2 className="font-extrabold text-black dark:text-white lg:leading-[3.5rem] text-[26px] sm:text-[48px]">
                     <span className="laptop:max-w-[22ch] block">
@@ -42,7 +42,7 @@ const Hero = () => {
         </div>
 
     { /* ============================ ABOUT ELEMENT ============================ */ }
-    <div className="sm:mb-[8%] mb-[6%] xl:mb-[0%] mt-[0%] 2xl:mt-[-10%] xl:mt-[0%] px-6 lg:px-12 xl:px-20 flex-col bg-[white] dark:bg-[#1c1c24] overflow-hidden relative lg:flex">
+    <div className="sm:mb-[8%] mb-[6%] xl:mb-[0%] mt-[0%] 2xl:mt-[-10%] xl:mt-[0%] px-6 lg:px-12 xl:px-20 flex-col bg-[white] dark:bg-[#0f0f14] overflow-hidden relative lg:flex">
 
         <div class="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:gap-4 lg:items-center">
             <div class="ml-auto lg:col-start-2 lg:max-w-2xl">
@@ -127,7 +127,7 @@ const Hero = () => {
     </div>
 
     { /* ============================ MEMBERS ELEMENT ============================ */ }
-    <div className="xl:text-end flex-col bg-white rounded-b-xl dark:bg-[#1c1c24] overflow-hidden relative lg:flex">
+    <div className="xl:text-end flex-col bg-white rounded-b-xl dark:bg-[#0f0f14] overflow-hidden relative lg:flex">
         <div className="flex flex-col xl:py-12 mobile:mx-[1rem] md:mx-[3rem] xl:mx-[6rem]">
             <p className="text-center lg:text-left xl:max-w-[48ch] mobile:mb-4 text-[22px] sm:text-[30px] md:text-[26px] lg:text-[28px] xl:text-[40px] xl:text-left font-bold text-gray-800 dark:text-white">
                 Join the Movement Towards a More Decentralized World

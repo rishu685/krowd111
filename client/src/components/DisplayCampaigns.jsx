@@ -22,20 +22,20 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
         />)} */}
 
       <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">{title} ({campaigns.length})</h1>
-      <h3 className="mb-[20px] mobile:text-[14px] mobile:max-w-[46ch] font-epilogue font-normal text-[16px] text-[#808190] text-left">Browse a list of all currently active campaigns.</h3>
+      <h3 className="mb-[20px] mobile:text-[14px] mobile:max-w-[46ch] font-epilogue font-normal text-[16px] text-[#606070] text-left">Browse a list of all currently active campaigns.</h3>
 
       <div className="sorting-container">
         <div className="justify-start mobile:justify-center tablet-s:justify-center flex flex-row gap-2 sorting-pills items-baseline">
-        <h3 className="mobile:text-[14px] mobile:max-w-[46ch] font-epilogue font-normal text-[16px] text-[#808190] text-left">Sorting</h3>
-          <div className="hover:text-[#cbcbcb] hover:transition-[0.2s] transition-[0.2s] cursor-pointer font-bold rounded-lg px-[12px] py-[6px] bg-[#1C1C24] text-[14px] text-[#808191] sort-by-last">
+        <h3 className="mobile:text-[14px] mobile:max-w-[46ch] font-epilogue font-normal text-[16px] text-[#606070] text-left">Sorting</h3>
+          <div className="hover:text-[#cbcbcb] hover:transition-[0.2s] transition-[0.2s] cursor-pointer font-bold rounded-lg px-[12px] py-[6px] bg-[#0f0f14] text-[14px] text-[#606070] sort-by-last">
             <h3>Latest</h3>
           </div>
 
-          <div className="hover:text-[#cbcbcb] hover:transition-[0.2s] transition-[0.2s] cursor-pointer font-bold rounded-lg px-[12px] py-[6px] bg-[#1C1C24] text-[14px] text-[#808191] sort-by-first">
+          <div className="hover:text-[#cbcbcb] hover:transition-[0.2s] transition-[0.2s] cursor-pointer font-bold rounded-lg px-[12px] py-[6px] bg-[#0f0f14] text-[14px] text-[#606070] sort-by-first">
             <h3>Earliest</h3>
           </div>
 
-          <div className="hover:text-[#cbcbcb] hover:transition-[0.2s] transition-[0.2s] cursor-pointer font-bold rounded-lg px-[12px] py-[6px] bg-[#1C1C24] text-[14px] text-[#808191] sort-by-first">
+          <div className="hover:text-[#cbcbcb] hover:transition-[0.2s] transition-[0.2s] cursor-pointer font-bold rounded-lg px-[12px] py-[6px] bg-[#0f0f14] text-[14px] text-[#606070] sort-by-first">
             <h3>Most Funded</h3>
           </div>
         </div>
