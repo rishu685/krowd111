@@ -1,4 +1,13 @@
 {
+  "name": "krowd-crowdfunding-platform",
+  "private": true,
+  "scripts": {
+    "dev": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "preview": "cd client && npm run preview",
+    "install-client": "cd client && npm install",
+    "install-web3": "cd WEB3 && npm install"
+  },
   "dependencies": {
     "@babel/helper-module-imports": "^7.18.6",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
