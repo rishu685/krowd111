@@ -1,0 +1,14 @@
+{
+  "name": "krowd11",
+  "version": "1.0.0",
+  "description": "Your project description",
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "cd server && PORT=5001 nodemon app.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.1.10"
+  }
+}
