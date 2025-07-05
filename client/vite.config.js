@@ -1,11 +1,15 @@
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  define: {
-    global: "globalThis",
-    "process.env": {},
+  resolve: {
+    alias: {
+      '@safe-globalThis/safe-ethers-adapters': path.resolve(
+        __dirname,
+        'node_modules/@safe-global/safe-ethers-adapters'
+      ),
+    },
   },
 });
