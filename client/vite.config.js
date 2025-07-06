@@ -18,7 +18,8 @@ export default defineConfig({
         'atropos/css',
         '@material-tailwind/react',
         '@fortawesome/react-fontawesome',
-        '@fortawesome/free-solid-svg-icons'
+        '@fortawesome/free-solid-svg-icons',
+        'react-icons',
       ],
     },
   },
