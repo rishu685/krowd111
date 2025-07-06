@@ -1,3 +1,4 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -16,12 +17,11 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'atropos/css',
-        '@material-tailwind/react',
         '@fortawesome/react-fontawesome',
         '@fortawesome/free-solid-svg-icons',
         'react-icons',
-        'react-icons/si',
-        'react-hot-toast' 
+        'react-hot-toast'
+        
       ],
     },
   },
