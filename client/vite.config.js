@@ -14,7 +14,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['atropos/css'],
+      external: ['atropos/css', '@material-tailwind/react'],
     },
   },
 });
