@@ -20,6 +20,7 @@ export default defineConfig({
         '@fortawesome/react-fontawesome',
         '@fortawesome/free-solid-svg-icons',
         'react-icons',
+        'react-hot-toast' 
       ],
     },
   },
