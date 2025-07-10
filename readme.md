@@ -36,4 +36,4 @@ Click the image below to browse this GitHub branch.</p>
 <hr>
 
 Click the link below to view live demo website.<br>
-<a href="https://krowd.netlify.app/">Browse the demo website</a>
+<a href="https://scintillating-marigold-e3feef.netlify.app/">Browse the demo website</a>
