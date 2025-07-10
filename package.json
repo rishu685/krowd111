@@ -2,11 +2,11 @@
   "name": "krowd-crowdfunding-platform",
   "private": true,
   "scripts": {
-    "dev": "cd client && npm run dev",
-    "build": "cd client && npm run build",
-    "preview": "cd client && npm run preview",
-    "install-client": "cd client && npm install",
-    "install-web3": "cd WEB3 && npm install"
+    "dev": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "preview": "npm run preview --prefix client",
+    "install-client": "npm install --prefix client",
+    "install-web3": "npm install --prefix WEB3"
   },
   "dependencies": {
     "@babel/helper-module-imports": "^7.18.6",
