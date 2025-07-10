@@ -39,7 +39,7 @@ const Footer = () => {
                             © Copyright 2023
                         </span>
                         <span className="mt-7 md:mt-1">
-                            By <a className="underline hover:text-primary-gray-20" href="https://www.linkedin.com/in/knappcharles/">Cadogy, LLC.</a>
+                            By Cadogy, LLC.
                         </span>
                     </div>
                 </div>
