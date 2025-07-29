@@ -1,6 +1,4 @@
-# React, Web3.0 Crowdfunding-Platform (Variant 1)
-
-<img src="https://i.ibb.co/ctZmDRy/Explainer-Frame-min.png">
+# React, Web3.0 Crowdfunding-Platform 
 The next-gen crowdfunding platform. Made with React, Solidity Smart Contracts, and ThirdWeb - This simple crowdfunding application allows users to back projects through the Blockchain and Ethereum.<br>
 <br>
 The flow is simple. A user connects their MetaMask wallet, then can create a campaign. Campaigns then can be backed by other users, using their wallet and Ethereum.
