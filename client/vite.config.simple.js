@@ -1,4 +1,4 @@
-// vite.config.js - Production ready configuration
+// vite.config.js - Simplified build configuration
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
