@@ -14,6 +14,7 @@ export default defineConfig({
     },
   },
   build: {
+    target: 'es2020',
     rollupOptions: {
       external: [
         'atropos/css',
@@ -25,4 +26,21 @@ export default defineConfig({
       ],
     },
   },
+  define: {
+    global: 'globalThis',
+  },
+  esbuild: {
+    target: 'es2020',
+    supported: {
+      'bigint': true
+    }
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2020',
+      supported: {
+        'bigint': true
+      }
+    }
+  }
 });

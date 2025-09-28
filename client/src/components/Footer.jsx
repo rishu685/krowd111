@@ -22,7 +22,7 @@ const Footer = () => {
                     <div className="h-px mx-auto mt-4 rounded-full mobile:hidden md:hidden w-11">
                     </div>
                     <div className="flex items-center justify-center flex-1 mt-4 border-[#1e1e28] md:mt-0 md:border-r">
-                        <a className="hover:text-primary-gray-20" href="https://github.com/yourusername/your-repo-name">
+                        <a className="hover:text-primary-gray-20" href="https://github.com/rishu685" target="_blank" rel="noopener noreferrer">
                             <span className="sr-only">
                                 View on GitHub
                             </span>
@@ -36,10 +36,10 @@ const Footer = () => {
                     </div>
                     <div className="flex flex-col items-center justify-center flex-1 mt-7 md:mt-0 md:items-start md:pl-5">
                         <span className="">
-                            © Copyright 2023
+                            © Copyright 2025
                         </span>
                         <span className="mt-7 md:mt-1">
-                            By <a className="underline hover:text-primary-gray-20" href="https://www.linkedin.com/in/knappcharles/">Cadogy, LLC.</a>
+                            By <a className="underline hover:text-primary-gray-20" href="https://github.com/rishu685" target="_blank" rel="noopener noreferrer">rishu685</a>
                         </span>
                     </div>
                 </div>
