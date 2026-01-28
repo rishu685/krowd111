@@ -17,9 +17,6 @@ Click the image below to browse this GitHub branch.</p>
 - PostCSS - CSS-in-JS and styles in JS objects.<br>
 - TailwindCSS - Frontend CSS service<br>
 
-### Web3 Technologies Used
-- Hardhat - Ethereum development environment. Compile your contracts and run them on a development network<br>
-- DotENV - Handles the system environment variables<br>
 
 ### Future Improvements
 - Better user-authentication methods. Implimentation of a user-account model before the connection of MetaMask.
@@ -34,7 +31,8 @@ Click the image below to browse this GitHub branch.</p>
 <hr>
 
 Click the link below to view live demo website.<br>
-<a href="[https://krowd-1.netlify.app/]">Browse the demo website</a>
+<a href="https://krowd-1.netlify.app/">Browse the demo website</a>
+
 
 
 
