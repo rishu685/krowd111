@@ -16,17 +16,23 @@ const CampaignAnalyzer = ({ campaignData, onAnalysisComplete }) => {
         setError(null);
 
         try {
-            const response = await fetch('/api/chat/analyze-campaign', {
+            // Use Netlify function in production, local API in development
+            const apiUrl = window.location.hostname === 'localhost' 
+                ? '/api/chat/analyze-campaign' 
+                : '/.netlify/functions/analyze-campaign';
+                
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ campaignData })
+                body: JSON.stringify(campaignData)
             });
 
             const data = await response.json();
             
-            if (data.success) {
+            // Handle both local API response format and Netlify function format
+            if (data.analysis || data.success) {
                 setAnalysis(data.analysis);
                 onAnalysisComplete?.(data.analysis);
             } else {

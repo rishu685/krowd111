@@ -44,7 +44,12 @@ const ChatAssistant = () => {
         setIsTyping(true);
 
         try {
-            const response = await fetch('/api/chat', {
+            // Use Netlify function in production, local API in development
+            const apiUrl = window.location.hostname === 'localhost' 
+                ? '/api/chat' 
+                : '/.netlify/functions/chat';
+                
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,10 +62,13 @@ const ChatAssistant = () => {
 
             const data = await response.json();
             
-            if (data.success) {
+            // Handle both local API response format and Netlify function format
+            const responseText = data.response || data.success ? data.response : data.error;
+            
+            if (data.response || data.success) {
                 const assistantMessage = {
                     role: 'assistant',
-                    content: data.response,
+                    content: responseText,
                     timestamp: new Date().toISOString()
                 };
                 setMessages(prev => [...prev, assistantMessage]);
