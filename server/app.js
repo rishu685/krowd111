@@ -1,8 +1,13 @@
 // server/app.js
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const GeminiChatService = require('./services/geminiChatService');
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5002;
+
+// Initialize AI Chat Service
+const chatService = new GeminiChatService();
 
 // Middleware
 app.use(cors());
@@ -347,6 +352,69 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
+// AI Chat endpoints
+app.post('/api/chat', async (req, res) => {
+  console.log('🎯 Chat API endpoint hit!', req.body);
+  try {
+    const { message, conversationHistory = [] } = req.body;
+    
+    console.log('📩 Received message:', message);
+    
+    if (!message || typeof message !== 'string') {
+      console.log('❌ Invalid message format');
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Message is required and must be a string' 
+      });
+    }
+
+    console.log('🤖 Generating response...');
+    const response = await chatService.generateResponse(message, conversationHistory);
+    console.log('✅ Response generated:', response.substring(0, 100) + '...');
+    
+    res.json({
+      success: true,
+      response: response,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('💥 Chat API error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: 'Failed to generate AI response',
+      fallback: "I'm experiencing some technical difficulties. Please try again in a moment!"
+    });
+  }
+});
+
+// Campaign analysis endpoint
+app.post('/api/chat/analyze-campaign', async (req, res) => {
+  try {
+    const { campaignData } = req.body;
+    
+    if (!campaignData) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Campaign data is required' 
+      });
+    }
+
+    const analysis = await chatService.analyzeCampaign(campaignData);
+    
+    res.json({
+      success: true,
+      analysis: analysis,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Campaign analysis error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: 'Failed to analyze campaign' 
+    });
+  }
+});
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
@@ -361,4 +429,6 @@ app.listen(PORT, () => {
   console.log('- POST /api/payments');
   console.log('- GET /api/analytics');
   console.log('- GET /api/admin/overview');
+  console.log('- POST /api/chat (AI Assistant)');
+  console.log('- POST /api/chat/analyze-campaign (AI Campaign Analysis)');
 });

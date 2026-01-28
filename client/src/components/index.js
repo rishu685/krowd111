@@ -9,3 +9,5 @@ export { default as Loader } from './Loader';
 export { default as Banner } from './Banner';
 export { default as Hero } from './Hero';
 export { default as Footer } from './Footer';
+export { default as ChatAssistant } from './ChatAssistant';
+export { default as CampaignAnalyzer } from './CampaignAnalyzer';

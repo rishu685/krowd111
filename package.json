@@ -4,7 +4,7 @@
   "description": "Your project description",
   "scripts": {
     "client": "cd client && npm run dev",
-    "server": "cd server && PORT=5001 nodemon app.js",
+    "server": "cd server && PORT=5002 nodemon app.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "devDependencies": {

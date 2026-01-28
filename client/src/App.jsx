@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { Footer, Sidebar, Navbar } from './components';
+import { Footer, Sidebar, Navbar, ChatAssistant } from './components';
 import { Landing, CampaignDetails, CreateCampaign, Home, Profile, PaymentMethods, Withdraw, Analytics, AdminPanel } from './pages';
 
 const App = () => {
@@ -28,8 +28,11 @@ const App = () => {
 
         <Footer />
       </div>
-    </div>
-  )
-}
 
-export default App
+      {/* AI Chat Assistant - Available on all pages */}
+      <ChatAssistant />
+    </div>
+  );
+};
+
+export default App;
