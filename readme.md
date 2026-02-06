@@ -64,7 +64,7 @@ Click the image below to browse this GitHub branch.</p>
       └─────────────────┘
 
 
-──────────── AI LAYER ────────────
+──────────── OPTIONAL BACKEND / AI LAYER ────────────
 
 ┌────────────────────────────────────────────┐
 │        Backend / API Layer (Node + Express)│
@@ -80,12 +80,12 @@ Click the image below to browse this GitHub branch.</p>
                │
 ┌──────────────▼───────────────┐
 │      AI Chat Assistant       │
-│ ───────────────────────────  │
-│ • OpenAI / Gemini API        │
-│ • Campaign Guidance          │
-│ • Fundraising Suggestions    │
-│ • Donor Targeting Insights   │
-│ • Real-time Q&A              │
+│ ─────────────────────────── │
+│ • OpenAI / Gemini API       │
+│ • Campaign Guidance         │
+│ • Fundraising Suggestions  │
+│ • Donor Targeting Insights │
+│ • Real-time Q&A             │
 └──────────────────────────────┘
 
 
@@ -103,6 +103,7 @@ Click the image below to browse this GitHub branch.</p>
 
 Click the link below to view live demo website.<br>
 <a href="https://krowd-1.netlify.app/">Browse the demo website</a>
+
 
 
 
