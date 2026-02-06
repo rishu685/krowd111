@@ -18,61 +18,8 @@ Click the image below to browse this GitHub branch.</p>
 - TailwindCSS - Frontend CSS service<br>
 
 ### Architecture 
-┌──────────────────────────────────────────────────────────────┐
-│                          End User                            │
-│              (Browser: Chrome )                              │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               │ HTTP / HTTPS
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│                    Frontend (React)                          │
-│ ─────────────────────────────────────────────────────────── │
-│ • Campaign Listing UI                                       │
-│ • Create Campaign Form                                      │
-│ • Donate / Fund Campaign UI                                 │
-│ • Wallet Connect (MetaMask)                                 │
-│ • AI Chat Assistant UI                                      │
-│ • State Management (React Hooks)                             │
-│ • Tailwind CSS (Responsive UI)                               │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               │ REST API Calls
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│                 Web3 Provider (MetaMask)                     │
-│ ─────────────────────────────────────────────────────────── │
-│ • Wallet Authentication                                     │
-│ • Transaction Signing                                       │
-└──────────────────────────────┬───────────────────────────────┘
+<img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/bff40e37-da93-4ac3-b072-12546f34155d" />
 
-
-
-
-────────────────────────  AI LAYER ────────────────────────
-
-
-┌──────────────────────────────────────────────────────────────┐
-│               Backend / API Layer (Node + Express)           │
-│ ─────────────────────────────────────────────────────────── │
-│ • REST APIs                                                  │
-│ • Campaign Metadata (Off-Chain)                              │
-│ • Search / Filter / Pagination                               │
-│ • User Analytics                                             │
-│ • AI Chat Request Routing                                   │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               │ API Calls
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│                   AI Chat Assistant                          │
-│ ─────────────────────────────────────────────────────────── │
-│ • OpenAI / Google Gemini API                                 │
-│ • Campaign Guidance                                         │
-│ • Fundraising Suggestions                                   │
-│ • Donor Targeting Insights                                  │
-│ • Real-time Q&A                                             │
-└──────────────────────────────────────────────────────────────┘
 
 
 ### Future Improvements
@@ -89,6 +36,7 @@ Click the image below to browse this GitHub branch.</p>
 
 Click the link below to view live demo website.<br>
 <a href="https://krowd-1.netlify.app/">Browse the demo website</a>
+
 
 
 
