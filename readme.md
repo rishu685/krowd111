@@ -1,7 +1,7 @@
 # Krowdfund Crowdfunding-Platform 
 The next-gen crowdfunding platform. Made with React - This simple crowdfunding application allows users to back projects through the Blockchain and Ethereum.<br>
 <br>
-The flow is simple. A user connects their  wallet, then can create a campaign. Campaigns then can be backed by other users, using their wallet and Ethereum.
+The flow is simple. A user  create a campaign. Campaigns then can be backed by other users, using their wallet and Ethereum.
 
 <p>This site variant brings a sticky navbar, footer, and modern content displays.<br>
 Click the image below to browse this GitHub branch.</p>
@@ -19,5 +19,6 @@ Click the image below to browse this GitHub branch.</p>
 - Better user profiles. With more customization options and personality.
 
 
-Live demo: website: https://krowd-1.netlify.app/
+Live demo: https://krowd-1.netlify.app/
+
 
