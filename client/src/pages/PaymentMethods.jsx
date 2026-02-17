@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CustomButton } from '../components';
 import { useStateContext } from '../context';
 import toast from 'react-hot-toast';
@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 const PaymentMethods = () => {
   const [selectedMethod, setSelectedMethod] = useState('crypto');
   const [isLoading, setIsLoading] = useState(false);
+  const [networkStatus, setNetworkStatus] = useState(null);
   const { connect, address, donate } = useStateContext();
   const [paymentData, setPaymentData] = useState({
     amount: '',
@@ -26,6 +27,36 @@ const PaymentMethods = () => {
     });
   };
 
+  // Check network status when wallet is connected
+  useEffect(() => {
+    const checkNetwork = async () => {
+      if (window.ethereum && address) {
+        try {
+          const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+          if (chainId === '0x5') {
+            setNetworkStatus('✅ Goerli Testnet');
+          } else {
+            setNetworkStatus('❌ Wrong Network (Switch to Goerli)');
+          }
+        } catch (error) {
+          setNetworkStatus('❓ Network Unknown');
+        }
+      } else {
+        setNetworkStatus(null);
+      }
+    };
+
+    checkNetwork();
+
+    // Listen for network changes
+    if (window.ethereum) {
+      window.ethereum.on('chainChanged', checkNetwork);
+      return () => {
+        window.ethereum.removeListener('chainChanged', checkNetwork);
+      };
+    }
+  }, [address]);
+
   const handlePayment = async () => {
     if (selectedMethod === 'crypto') {
       // Validate crypto payment fields
@@ -37,6 +68,43 @@ const PaymentMethods = () => {
       if (!address) {
         toast.error('Please connect your wallet first');
         return;
+      }
+
+      // Check if we're on the correct network (Goerli)
+      if (window.ethereum) {
+        try {
+          const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+          if (chainId !== '0x5') { // Goerli chain ID
+            const switchToGoerli = window.confirm('You need to switch to Goerli testnet. Switch now?');
+            if (switchToGoerli) {
+              try {
+                await window.ethereum.request({
+                  method: 'wallet_switchEthereumChain',
+                  params: [{ chainId: '0x5' }], // Goerli
+                });
+              } catch (switchError) {
+                if (switchError.code === 4902) {
+                  // Network doesn't exist, add it
+                  await window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: [{
+                      chainId: '0x5',
+                      chainName: 'Goerli Testnet',
+                      nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+                      rpcUrls: ['https://goerli.infura.io/v3/'],
+                      blockExplorerUrls: ['https://goerli.etherscan.io/']
+                    }]
+                  });
+                }
+              }
+            } else {
+              toast.error('Please switch to Goerli testnet to continue');
+              return;
+            }
+          }
+        } catch (error) {
+          console.error('Network check error:', error);
+        }
       }
 
       // Validate amount is a positive number
@@ -62,7 +130,13 @@ const PaymentMethods = () => {
         });
       } catch (error) {
         console.error('Donation error:', error);
-        toast.error('Donation failed. Please check your wallet and try again.', { id: 'donation' });
+        if (error.message.includes('user rejected')) {
+          toast.error('Transaction was rejected by user', { id: 'donation' });
+        } else if (error.message.includes('insufficient funds')) {
+          toast.error('Insufficient funds in your wallet', { id: 'donation' });
+        } else {
+          toast.error('Donation failed. Please check your wallet and try again.', { id: 'donation' });
+        }
       } finally {
         setIsLoading(false);
       }
@@ -137,6 +211,9 @@ const PaymentMethods = () => {
                 <div className="mb-4 p-3 bg-[#1c1c24] rounded-lg border border-[#1dc071]">
                   <p className="text-[#1dc071] text-sm mb-1">✅ Wallet Connected</p>
                   <p className="text-white font-mono text-sm break-all">{address}</p>
+                  {networkStatus && (
+                    <p className="text-xs mt-2 font-semibold">{networkStatus}</p>
+                  )}
                 </div>
                 
                 <div className="mb-4">
@@ -182,7 +259,36 @@ const PaymentMethods = () => {
               <div>
                 <CustomButton
                   btnType="button"
-                  title="Connect Wallet"
+                  title="🦊 Connect MetaMask"
+                  styles="bg-[#f6851b] hover:bg-[#e76f00] w-full mb-3"
+                  handleClick={async () => {
+                    try {
+                      // Check if MetaMask is installed
+                      if (typeof window.ethereum === 'undefined') {
+                        toast.error('MetaMask is not installed! Please install MetaMask browser extension.');
+                        window.open('https://metamask.io/download/', '_blank');
+                        return;
+                      }
+
+                      // Make sure we're requesting to connect to MetaMask specifically
+                      if (window.ethereum.isMetaMask) {
+                        toast.loading('Connecting to MetaMask...', { id: 'wallet-connection' });
+                        await connect();
+                        toast.success('MetaMask connected successfully!', { id: 'wallet-connection' });
+                      } else {
+                        toast.error('Please use MetaMask to connect');
+                      }
+                    } catch (error) {
+                      console.error('Connection error:', error);
+                      toast.error('Failed to connect to MetaMask. Please try again.', { id: 'wallet-connection' });
+                    }
+                  }}
+                />
+                
+                {/* Alternative connection button for other wallets */}
+                <CustomButton
+                  btnType="button"
+                  title="🔗 Connect Other Wallet"
                   styles="bg-[#8c6dfd] w-full"
                   handleClick={() => {
                     connect();
@@ -190,10 +296,13 @@ const PaymentMethods = () => {
                 />
                 
                 <div className="mt-4 p-3 bg-[#1c1c24] rounded-lg border border-[#3a3a43]">
-                  <h4 className="text-[#1dc071] text-sm font-semibold mb-2">💡 Supported Wallets</h4>
-                  <p className="text-gray-300 text-xs">
-                    MetaMask, WalletConnect, and other web3 wallets are supported. Make sure you're connected to the Goerli testnet.
-                  </p>
+                  <h4 className="text-[#f6851b] text-sm font-semibold mb-2">🦊 MetaMask Setup</h4>
+                  <div className="text-gray-300 text-xs space-y-1">
+                    <p>• Make sure MetaMask extension is installed</p>
+                    <p>• Switch to <span className="text-[#1dc071] font-semibold">Goerli Testnet</span></p>
+                    <p>• Have some Goerli ETH for transactions</p>
+                    <p>• Get test ETH from <a href="https://goerlifaucet.com/" target="_blank" className="text-[#8c6dfd] underline">Goerli Faucet</a></p>
+                  </div>
                 </div>
               </div>
             )}
