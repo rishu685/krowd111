@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { CustomButton } from '../components';
+import { useStateContext } from '../context';
+import toast from 'react-hot-toast';
 
 const PaymentMethods = () => {
   const [selectedMethod, setSelectedMethod] = useState('crypto');
+  const [isLoading, setIsLoading] = useState(false);
+  const { connect, address, donate } = useStateContext();
   const [paymentData, setPaymentData] = useState({
     amount: '',
     campaignId: '',
@@ -23,8 +27,50 @@ const PaymentMethods = () => {
   };
 
   const handlePayment = async () => {
-    console.log('Processing payment with method:', selectedMethod, paymentData);
-    // Payment processing logic here
+    if (selectedMethod === 'crypto') {
+      // Validate crypto payment fields
+      if (!paymentData.campaignId || !paymentData.amount) {
+        toast.error('Please fill in both Campaign ID and Amount fields');
+        return;
+      }
+
+      if (!address) {
+        toast.error('Please connect your wallet first');
+        return;
+      }
+
+      // Validate amount is a positive number
+      const amount = parseFloat(paymentData.amount);
+      if (isNaN(amount) || amount <= 0) {
+        toast.error('Please enter a valid amount greater than 0');
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        toast.loading('Processing your donation...', { id: 'donation' });
+        
+        await donate(paymentData.campaignId, paymentData.amount);
+        
+        toast.success('Donation successful! Thank you for your contribution.', { id: 'donation' });
+        
+        // Clear form after successful donation
+        setPaymentData({
+          ...paymentData,
+          campaignId: '',
+          amount: ''
+        });
+      } catch (error) {
+        console.error('Donation error:', error);
+        toast.error('Donation failed. Please check your wallet and try again.', { id: 'donation' });
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      console.log('Processing payment with method:', selectedMethod, paymentData);
+      // Other payment methods logic here
+      toast.error('This payment method is not yet implemented');
+    }
   };
 
   return (
@@ -85,12 +131,72 @@ const PaymentMethods = () => {
           <div className="bg-[#2c2f36] p-6 rounded-lg">
             <h3 className="text-white font-semibold mb-4">Cryptocurrency Payment</h3>
             <p className="text-gray-300 mb-4">Connect your wallet to pay with cryptocurrency</p>
-            <CustomButton
-              btnType="button"
-              title="Connect Wallet"
-              styles="bg-[#8c6dfd] w-full"
-              handleClick={() => console.log('Connect wallet')}
-            />
+            
+            {address ? (
+              <div>
+                <div className="mb-4 p-3 bg-[#1c1c24] rounded-lg border border-[#1dc071]">
+                  <p className="text-[#1dc071] text-sm mb-1">✅ Wallet Connected</p>
+                  <p className="text-white font-mono text-sm break-all">{address}</p>
+                </div>
+                
+                <div className="mb-4">
+                  <label className="text-white block mb-2">Campaign ID *</label>
+                  <input
+                    type="text"
+                    name="campaignId"
+                    placeholder="Enter campaign ID to donate to"
+                    value={paymentData.campaignId}
+                    onChange={handleInputChange}
+                    className="w-full py-3 px-4 bg-[#1c1c24] text-white rounded-lg border border-[#3a3a43] focus:border-[#1dc071] outline-none"
+                  />
+                </div>
+                
+                <div className="mb-4">
+                  <label className="text-white block mb-2">Amount (ETH) *</label>
+                  <input
+                    type="text"
+                    name="amount"
+                    placeholder="0.0"
+                    value={paymentData.amount}
+                    onChange={handleInputChange}
+                    className="w-full py-3 px-4 bg-[#1c1c24] text-white rounded-lg border border-[#3a3a43] focus:border-[#1dc071] outline-none"
+                  />
+                </div>
+                
+                <CustomButton
+                  btnType="button"
+                  title={isLoading ? "Processing..." : "Donate with Crypto"}
+                  styles={`${isLoading ? 'bg-[#808080]' : 'bg-[#1dc071]'} w-full`}
+                  handleClick={handlePayment}
+                  disabled={isLoading}
+                />
+                
+                <div className="mt-4 p-3 bg-[#1c1c24] rounded-lg border border-[#3a3a43]">
+                  <h4 className="text-[#1dc071] text-sm font-semibold mb-2">ℹ️ How to find Campaign ID</h4>
+                  <p className="text-gray-300 text-xs">
+                    Go to the campaign details page, and the campaign ID will be displayed in the URL or campaign information section.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <CustomButton
+                  btnType="button"
+                  title="Connect Wallet"
+                  styles="bg-[#8c6dfd] w-full"
+                  handleClick={() => {
+                    connect();
+                  }}
+                />
+                
+                <div className="mt-4 p-3 bg-[#1c1c24] rounded-lg border border-[#3a3a43]">
+                  <h4 className="text-[#1dc071] text-sm font-semibold mb-2">💡 Supported Wallets</h4>
+                  <p className="text-gray-300 text-xs">
+                    MetaMask, WalletConnect, and other web3 wallets are supported. Make sure you're connected to the Goerli testnet.
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
